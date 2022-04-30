@@ -17,4 +17,10 @@ todoAPP.get('/', function (req, res){
     res.json(todoList);
 });
 
+todoAPP.post('/add', function(req,res){
+    console.log('Adding a todo');
+    todoList.push(req.body.todo);
+    res.redirect(req.baseUrl+ '/index');
+});
+
 module.exports = todoAPP;
