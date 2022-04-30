@@ -22,7 +22,14 @@ todoAPP.get('/list', function (req, res){
 
 todoAPP.post('/add', function(req,res){
     console.log('Adding a todo');
-    todoList.push(req.body.todo);
+
+    let newTodo = {
+        name: req.body.todo,
+        completed: false,
+        number: todoList.length+1
+    }
+
+    todoList.push(newTodo);
     res.redirect(req.baseUrl + '/list');
 });
 
