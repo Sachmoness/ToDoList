@@ -7,7 +7,7 @@ let todoList = [
     {
         name: 'Do Some Work',
         completed: false,
-        number: 1
+        id: 1
     },
 
 ]
@@ -26,10 +26,16 @@ todoAPP.post('/add', function(req,res){
     let newTodo = {
         name: req.body.todo,
         completed: false,
-        number: todoList.length+1
+        id: todoList.length+1
     }
 
     todoList.push(newTodo);
+    res.redirect(req.baseUrl + '/list');
+});
+
+todoAPP.post('/remove/:id', function (req, res){
+    console.log('Deleting a todo');
+    todoList.splice(req.params.id,1);
     res.redirect(req.baseUrl + '/list');
 });
 
