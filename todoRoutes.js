@@ -39,4 +39,12 @@ todoAPP.post('/remove/:id', function (req, res){
     res.redirect(req.baseUrl + '/list');
 });
 
+todoAPP.post('/update', function (req, res){
+    console.log('Updating a todo');
+
+    var index = req.body.idUpdate - 1; // subtract 1 for 0 indexing.
+    todoList[index].completed = true;
+    res.redirect(req.baseUrl + '/list');
+});
+
 module.exports = todoAPP;
