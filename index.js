@@ -9,7 +9,7 @@ let bodyParser = require('body-parser');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
-app.use('/', todoAPP);
+app.use('/todos', todoAPP);
 
 app.listen(8080);
 console.log("Express server on port 8080!!!");
