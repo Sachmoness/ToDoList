@@ -18,9 +18,9 @@
 
 </form>
 
-<form action="/remove" method="post">
-    Remove ToDo Item:
-    <input type="text" id="todoRemove" name="todoRemove"></input>
+<form action="/remove/:id" method="post">
+    Remove ToDo Item by number:
+    <input type="text" id="id" name="id"></input>
     <button type="submit" id = "removeTodoBtn">Remove</button>
 
 </form>
