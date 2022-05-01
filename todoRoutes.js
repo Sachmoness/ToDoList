@@ -33,9 +33,10 @@ todoAPP.post('/add', function(req,res){
     res.redirect(req.baseUrl + '/list');
 });
 
-todoAPP.post('/remove/:id', function (req, res){
+todoAPP.post('/remove', function (req, res){
     console.log('Deleting a todo');
-    todoList.splice(req.params.id,1);
+    var index = req.body.idRemove - 1;
+    todoList.splice(index,1);
     res.redirect(req.baseUrl + '/list');
 });
 
