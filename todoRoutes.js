@@ -18,7 +18,7 @@ todoAPP.get('/', function (req, res){
 
 todoAPP.get('/list', function (req, res){
 
-    if(Array.isArray(todoList) && todoList.length ){
+    if(Array.isArray(todoList) && todoList.length){
         res.json(todoList);
         res.status(200);
     }
@@ -30,16 +30,27 @@ todoAPP.get('/list', function (req, res){
 });
 
 todoAPP.post('/add', function(req,res){
-    console.log('Adding a todo');
 
-    let newTodo = {
-        name: req.body.todo,
-        completed: false,
-        id: todoList.length+1
+    if(typeof todoList != "undefined" && todoList != null){
+        let newTodo = {
+            name: req.body.todo,
+            completed: false,
+            id: todoList.length+1
+        }
+    
+        todoList.push(newTodo);
+        res.redirect(req.baseUrl + '/list');
+
+        console.log('Adding a todo');
+
+        res.status(200);
+    }else{
+        res.status(500);
+        res.send("Oops something went wrong");
     }
+    
 
-    todoList.push(newTodo);
-    res.redirect(req.baseUrl + '/list');
+   
 });
 
 todoAPP.post('/remove', function (req, res){
