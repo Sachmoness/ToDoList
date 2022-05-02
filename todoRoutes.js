@@ -18,7 +18,7 @@ todoAPP.get('/', function (req, res){
 
 todoAPP.get('/list', function (req, res){
 
-    if(Array.isArray(todoList) && todoList.length){
+    if(typeof todoList != "undefined" && todoList != null){
         res.json(todoList);
         res.status(200);
     }
