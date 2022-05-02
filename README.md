@@ -13,17 +13,17 @@ The RESTful api made would allow the webpage to comminicate with the storage ser
 * Ensure Node, Express and body-parser are installed.
     * npm install express and npm install body-parser.
 * Run the application with:
-    * node index.js
-    * Go to the adress localhost:8080/todos in your browser (this is the homepage and is to be used to test the api)
+    * node index.js (in terminal with the file location open).
+    * Go to the adress localhost:8080/todos in your browser (this is the homepage and is to be used to test the api).
 
 
 ## Design Choices
 * Since the front-end was made using HTML, the delete and put routes were made as posts.
-* The front end was made using html forms to easily test the api manually
+* The front end was made using html forms to easily test the api manually.
 * The index was used as an input for deleting and editing a todo item as this was an easy way to test the funcitonality. E.g. if the user enters 3 the api should edit/delete the third todo item.
 
 
-## Considerations for future
+## Considerations for Future
 * By creating a front-end the api deviated from the required routes given as posts had to be used.
 * In future a Unit testing framewrok such as Jest should be implemeted during development.
 * Some more checks to ensure the user can't add duplicate todos can be added.
