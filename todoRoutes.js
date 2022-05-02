@@ -2,7 +2,7 @@ let path = require('path');
 let express = require('express');
 let todoAPP = express.Router();
 
-/*let todoList = [
+let todoList = [
 
     {
         name: 'Do Some Work',
@@ -10,7 +10,7 @@ let todoAPP = express.Router();
         id: 1
     },
 
-]*/
+]
 
 todoAPP.get('/', function (req, res){
     res.sendFile(path.join(__dirname,'views', 'todo', 'index.html'));
@@ -54,18 +54,37 @@ todoAPP.post('/add', function(req,res){
 });
 
 todoAPP.post('/remove', function (req, res){
-    console.log('Deleting a todo');
+
     var index = req.body.idRemove - 1;
-    todoList.splice(index,1);
-    res.redirect(req.baseUrl + '/list');
+
+    if(typeof todoList != "undefined" && todoList != null && todoList.length > index){ // check if the index is not larger than array size.
+        console.log('Deleting a todo');
+        
+        todoList.splice(index,1);
+        res.redirect(req.baseUrl + '/list');
+    }
+    else{
+        res.status(500);
+        res.send("Oops something went wrong");
+    }
+  
 });
 
 todoAPP.post('/update', function (req, res){
-    console.log('Updating a todo');
+
 
     var index = req.body.idUpdate - 1; // subtract 1 for 0 indexing.
-    todoList[index].completed = true;
-    res.redirect(req.baseUrl + '/list');
+
+    if(typeof todoList != "undefined" && todoList != null && todoList.length > index){
+        console.log('Updating a todo');
+        todoList[index].completed = true;
+        res.redirect(req.baseUrl + '/list');
+    }
+    else{
+        res.status(500);
+        res.send("Oops something went wrong");
+    }
+    
 });
 
 module.exports = todoAPP;
