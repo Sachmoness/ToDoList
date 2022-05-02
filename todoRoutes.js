@@ -17,35 +17,74 @@ todoAPP.get('/', function (req, res){
 });
 
 todoAPP.get('/list', function (req, res){
-    res.json(todoList);
+
+    if(typeof todoList != "undefined" && todoList != null){
+        res.json(todoList);
+        res.status(200);
+    }
+    else{
+        res.status(500);
+        res.send("Oops something went wrong");
+    }
+    
 });
 
 todoAPP.post('/add', function(req,res){
-    console.log('Adding a todo');
 
-    let newTodo = {
-        name: req.body.todo,
-        completed: false,
-        id: todoList.length+1
+    if(typeof todoList != "undefined" && todoList != null && req.body.todo != "I'm Lazy"){
+        let newTodo = {
+            name: req.body.todo,
+            completed: false,
+            id: todoList.length+1
+        }
+    
+        todoList.push(newTodo);
+        res.redirect(req.baseUrl + '/list');
+
+        console.log('Adding a todo');
+
+        res.status(200);
+    }else{
+        res.status(500);
+        res.send("Oops something went wrong");
     }
+    
 
-    todoList.push(newTodo);
-    res.redirect(req.baseUrl + '/list');
+   
 });
 
 todoAPP.post('/remove', function (req, res){
-    console.log('Deleting a todo');
+
     var index = req.body.idRemove - 1;
-    todoList.splice(index,1);
-    res.redirect(req.baseUrl + '/list');
+
+    if(typeof todoList != "undefined" && todoList != null && todoList.length > index){ // check if the index is not larger than array size.
+        console.log('Deleting a todo');
+        
+        todoList.splice(index,1);
+        res.redirect(req.baseUrl + '/list');
+    }
+    else{
+        res.status(500);
+        res.send("Oops something went wrong");
+    }
+  
 });
 
 todoAPP.post('/update', function (req, res){
-    console.log('Updating a todo');
+
 
     var index = req.body.idUpdate - 1; // subtract 1 for 0 indexing.
-    todoList[index].completed = true;
-    res.redirect(req.baseUrl + '/list');
+
+    if(typeof todoList != "undefined" && todoList != null && todoList.length > index){
+        console.log('Updating a todo');
+        todoList[index].completed = true;
+        res.redirect(req.baseUrl + '/list');
+    }
+    else{
+        res.status(500);
+        res.send("Oops something went wrong");
+    }
+    
 });
 
 module.exports = todoAPP;
