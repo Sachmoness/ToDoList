@@ -31,7 +31,7 @@ todoAPP.get('/list', function (req, res){
 
 todoAPP.post('/add', function(req,res){
 
-    if(typeof todoList != "undefined" && todoList != null && req.body.todo != "I'm Lazy"){
+    if(typeof todoList != "undefined" && todoList != null && req.body.todo != "I'm lazy"){
         let newTodo = {
             name: req.body.todo,
             completed: false,
